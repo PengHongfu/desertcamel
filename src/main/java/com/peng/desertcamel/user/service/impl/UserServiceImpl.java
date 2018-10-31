@@ -5,8 +5,9 @@ import com.peng.desertcamel.user.dao.UserDao;
 import com.peng.desertcamel.user.entity.User;
 import com.peng.desertcamel.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +17,7 @@ import java.util.UUID;
  * Time: 2017/4/17 16:53
  * User业务层
  */
-@Transactional
+@CacheConfig(cacheNames = "user")
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -40,6 +41,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    //使用自定义的keyGenerator
+    @Cacheable(cacheNames = {"user"},keyGenerator = "cacheKeyGenerator")
     @Override
     public List<User> selectAll() {
         return userDao.selectAll();

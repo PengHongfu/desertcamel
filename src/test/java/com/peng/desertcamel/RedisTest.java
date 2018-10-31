@@ -68,7 +68,7 @@ public class RedisTest {
         keys.add("multi3");
         System.out.println(redisTemplate.opsForValue().multiGet(keys));
 
-        User user = (User) redisTemplate.opsForValue().get("userKey1");
+        User user = (User) redisTemplate.opsForValue().get("value3");
         System.out.println(user.toString());
         //System.out.println("get key value:"+ redisService.getValue("key"));
     }

@@ -13,7 +13,6 @@ import java.sql.SQLException;
 /**
  * Created by PengHongfu 2018/10/30 11:31
  */
-@Slf4j
 @Component
 //可以将application.yml中前缀为spring.datasource的配置项，自动注入到当前bean中
 @ConfigurationProperties(prefix = "spring.datasource")

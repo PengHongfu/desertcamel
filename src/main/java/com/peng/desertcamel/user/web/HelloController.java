@@ -30,12 +30,12 @@ public class HelloController {
     public String testt() {
         int pageNum=1;
         int pageSize=3;
-        Page<User> page = PageHelper.startPage(pageNum, pageSize);
+        //Page<User> page = PageHelper.startPage(pageNum, pageSize);
         List<User> userList = userService.selectAll();
-        System.out.println("总共条数："+page.getTotal());
-        for (User user : page.getResult()) {
-            System.out.println(user.toString());
-        }
+//        System.out.println("总共条数："+page.getTotal());
+//        for (User user : page.getResult()) {
+//            System.out.println(user.toString());
+//        }
         return JSON.toJSONString(userList);
     }
 

@@ -1,12 +1,15 @@
 package com.peng.desertcamel.database.redis;
 
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -24,7 +27,7 @@ import java.lang.reflect.Method;
  */
 @Configuration
 @EnableCaching
-public class RedisConfiguration {
+public class RedisConfiguration extends CachingConfigurerSupport {
 
 
     @Autowired
@@ -32,25 +35,25 @@ public class RedisConfiguration {
 
     /**
      * @return 自定义策略生成的key
-     * @description 自定义的缓存key的生成策略 若想使用这个key  只需要将注解上keyGenerator的值设置为keyGenerator即可
+     * @description 自定义的缓存key的生成策略 若想使用这个key
+     * 只需要将注解上keyGenerator的值设置为cacheKeyGenerator即可
      */
     @Bean
-    public KeyGenerator keyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuffer sb = new StringBuffer();
-                sb.append(target.getClass().getName());
-                sb.append(method.getName());
-                for (Object obj : params) {
-                    sb.append(obj.toString());
-                }
-                return sb.toString();
+    public KeyGenerator cacheKeyGenerator() {
+        return (target, method, params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append("desertCamel"+target.getClass().getName());
+            //可以加各种自定义字符
+            sb.append(method.getName());
+            for (Object obj : params) {
+                // 由于参数可能不同, hashCode肯定不一样, 缓存的key也需要不一样
+                sb.append(JSON.toJSONString(obj).hashCode());
             }
+            return sb.toString();
         };
     }
 
-    //缓存管理器
+    //缓存管理器 使用redis作为缓存数据库
     @Bean
     public RedisCacheManager cacheManager(JedisConnectionFactory jedisConnectionFactory) {
         return RedisCacheManager.create(jedisConnectionFactory);
