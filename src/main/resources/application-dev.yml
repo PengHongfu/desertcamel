@@ -1,0 +1,45 @@
+#端口路径
+server:
+  port: 8084
+  servlet:
+    context-path: /
+
+
+
+spring:
+  #redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0 #共16个
+    timeout: 60s
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1s
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+
+#      lettuce:redis的另一种连接池 生菜
+#        pool:
+#          max-active: 100 # 最大活跃连接数，负数为不限制
+#          max-wait: -1ms # 等待可用连接的最大时间，负数为不限制
+#          max-idle: 20 # 最大空闲连接数
+#          min-idle: 1 # 最小空闲连接数
+
+  #mysql连接
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_miaosha?useSSL=false&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    max-active: 20
+#   min-idle:
+#   initial-size:
+#   max-total:
+#   .....
