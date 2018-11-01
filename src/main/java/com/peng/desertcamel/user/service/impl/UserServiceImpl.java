@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //使用自定义的keyGenerator
-    @Cacheable(cacheNames = {"user"},keyGenerator = "cacheKeyGenerator")
+    //@Cacheable(cacheNames = {"user"},keyGenerator = "cacheKeyGenerator")
     @Override
     public List<User> selectAll() {
         return userDao.selectAll();

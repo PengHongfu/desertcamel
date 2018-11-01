@@ -5,23 +5,26 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.peng.desertcamel.user.entity.User;
 import com.peng.desertcamel.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * Created by PengHongfu 2018/10/29 17:51
  */
+@Slf4j
 @Controller
 public class HelloController {
-
-    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
     @Autowired
     private UserService userService;
 
@@ -40,15 +43,34 @@ public class HelloController {
     }
 
 
-    @RequestMapping(value = "/greeting")
-    public String test(Model model) {
-        logger.trace("这是一个trace日志");
-        logger.debug("这是一个debug日志");
-        logger.info("这是一个info日志");
-        logger.warn("这是一个warn日志");
-        logger.error("这是一个error日志");
+    @RequestMapping(value = "/login")
+    public String testLogin(Model model) {
+        log.info("登录操作");
+        model.addAttribute("title","登录页");
+        return "/login";
+    }
+    @RequestMapping(value = "/regist")
+    public String testRegist(Model model) {
+        log.info("注册操作");
+        model.addAttribute("title","注册页");
+        return "/regist";
+    }
 
-        model.addAttribute("title","欢迎使用Thymeleaf!");
-        return "/index";
+    @ResponseBody
+    @RequestMapping("user/toregist")
+    public String toregist(@Valid User user, Model model) {
+        System.out.println("User..." + user.toString());
+        log.info("User={}" ,user.toString());
+        //int i = userService.insertSelective(user);
+
+        return "";
+    }@ResponseBody
+    @RequestMapping("user/tologin")
+    public String tologini(@Valid User user, Model model) {
+        System.out.println("User..." + user.toString());
+        log.info("User={}" ,user.toString());
+
+
+        return "";
     }
 }

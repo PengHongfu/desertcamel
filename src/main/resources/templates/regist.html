@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<div class="container">
+
+    <form id="myform" class="form-signin" action="user/toregist" method="post">
+        <h2 class="title">你好，请注册！</h2>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                 <span class="input-group-addon"><span class="glyphicon glyphicon-user "
+                                                       aria-hidden="true"></span></span>
+                <input type="text" class="form-control input-lg" id="loginname" name="loginname" placeholder="用户名">
+            </div>
+            <!--<p class="text-warning small">${loginname}</p>-->
+        </div>
+        <div class="form-group has-feedback">
+
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock "
+                                                      aria-hidden="true"></span></span>
+                <input type="password" class="form-control input-lg" id="loginpass" name="loginpass" placeholder="密码">
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock "
+                                                       aria-hidden="true"></span></span>
+                <input type="password" class="form-control input-lg" id="reloginpass" name="reloginpass"
+                       placeholder="确认密码">
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope "
+                                                       aria-hidden="true"></span></span>
+                <input type="email" class="form-control input-lg" id="email" name="email" placeholder="邮箱">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block  btn-lg">注册</button>
+    </form>
+    <img  th:src="@{/003.png}"
+          alt="...">
+</div>
+
+<div class="mybottom" style="visibility: hidden">隐藏的div</div>
+</body>
+</html>

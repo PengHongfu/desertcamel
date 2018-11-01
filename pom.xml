@@ -50,6 +50,7 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -122,7 +123,12 @@
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap}</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrapvalidator -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrapvalidator</artifactId>
+            <version>0.5.3</version>
+        </dependency>
         <!-- jquery -->
         <dependency>
         <groupId>org.webjars</groupId>

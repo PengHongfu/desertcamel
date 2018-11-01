@@ -114,12 +114,12 @@
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.peng.desertcamel.user.entity.User">
-    update t_user
-    set loginname = #{loginname,jdbcType=VARCHAR},
-      loginpass = #{loginpass,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR}
-    where uid = #{uid,jdbcType=CHAR}
+        update t_user
+        set loginname = #{loginname,jdbcType=VARCHAR},
+          loginpass = #{loginpass,jdbcType=VARCHAR},
+          email = #{email,jdbcType=VARCHAR},
+          phone = #{phone,jdbcType=VARCHAR},
+          address = #{address,jdbcType=VARCHAR}
+        where uid = #{uid,jdbcType=CHAR}
   </update>
 </mapper>

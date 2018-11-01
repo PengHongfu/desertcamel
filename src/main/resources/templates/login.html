@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base href=" <%=basePath%>">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/webjars/bootstrapvalidator.0.5.3/css/bootstrapValidator.css"/>
+    <script type="text/javascript" src="/webjars/bootstrapvalidator.0.5.3/js/bootstrapValidator.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .mybottom {
+            bottom: 0;
+            height: 150px;
+        }
+
+        #registbtn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form id="myform" class="form-signin" action="user/tologin" method="post">
+        <h2 class="title">你好，请登录！</h2>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                 <span class="input-group-addon"><span class="glyphicon glyphicon-user "
+                                                       aria-hidden="true"></span></span>
+
+                <input type="text" value="" class="form-control input-lg" id="loginname"
+                       name="loginname" placeholder="用户名">
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock "
+                                                      aria-hidden="true"></span></span>
+                <input type="password" class="form-control input-lg" id="loginpass" name="loginpass" placeholder="密码">
+            </div>
+            <!--<p class="text-warning small">${loginmsg}</p>-->
+        </div>
+        <button type="submit" class="btn btn-primary btn-block  btn-lg">登录</button>
+
+        <a id="registbtn" class="btn btn-primary btn-block  btn-lg" href="/regist" role="button">注册</a>
+
+    </form>
+</div>
+<div class="mybottom" style="visibility: hidden">隐藏的div</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myform')
+            .bootstrapValidator({
+                message: '输入值不合法',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    loginname: {
+                        message: '用户名不合法',
+                        validators: {
+                            notEmpty: {
+                                message: '用户名不能为空'
+                            },
+                            stringLength: {
+                                min: 3,
+                                max: 30,
+                                message: '请输入3到30个字符'
+                            },
+                            threshold: 3,//有3字符以上才发送ajax请求
+                            remote: {//ajax验证。server result:{"valid",true or false} 向服务发送当前input name值，获得一个json数据。例表示正确：{"valid",true}
+                                url: 'User/checkNameExistsMethod2',//验证地址
+                                message: '该用户不存在',//提示消息
+                                delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                                type: 'POST'//请求方式
+                                /**自定义提交数据，默认值提交当前input value
+                                 *  data: function(validator) {
+                                           return {
+                                               password: $('[name="passwordNameAttributeInYourForm"]').val(),
+                                               whatever: $('[name="whateverNameAttributeInYourForm"]').val()
+                                       };
+                                    }
+                                 */
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\. \u4e00-\u9fa5 ]+$/,
+                                message: '用户名只能由字母、数字、点、下划线和汉字组成 '
+                            }
+                        }
+                    },
+                    loginpass: {
+                        message: '密码不合法',
+                        validators: {
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '请输入6到30个字符'
+                            },
+                            notEmpty: {
+                                message: '密码不能为null'
+                            },
+                            identical: {
+                                field: 'reloginpass',
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'loginname',
+                                message: '密码不能和用户名相同'
+                            }
+                        }
+                    }
+                }
+            })
+        /*.on('success.form.bv', function (e) {//点击提交之后
+         // Prevent form submission
+         e.preventDefault();//关闭表单的submi事件
+
+         // Get the form instance
+         var $form = $(e.target);
+
+         // Get the BootstrapValidator instance
+         var bv = $form.data('bootstrapValidator');
+         // Use Ajax to submit form data 提交至form标签中的action，result自定义
+         $.post($form.attr('action'), $form.serialize(), function (result) {
+         //dosomething
+         });
+
+         });*/
+    });
+</script>
+</body>
+</html>
