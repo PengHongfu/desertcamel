@@ -12,14 +12,13 @@ import java.util.List;
 
 public interface UserService {
 
-     User selectByPrimaryKey(String uid);
+     User selectByloginName(String loginname);
 
      int insertSelective(User user) throws RuntimeException;
 
      List<User> selectAll();
 
-     User selectByNameAndPass(User user);
+     List<String> selectRolesByLoginName(String loginname);
 
-     int updateByPrimaryKeySelective(User record);
 
 }

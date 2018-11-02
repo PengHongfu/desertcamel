@@ -47,7 +47,7 @@
       )
   </insert>
 
-    <insert id="insertSelective" parameterType="com.peng.desertcamel.user.entity.User">
+    <!--<insert id="insertSelective" parameterType="com.peng.desertcamel.user.entity.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uid != null">
@@ -89,7 +89,7 @@
                 #{address,jdbcType=VARCHAR},
             </if>
         </trim>
-    </insert>
+    </insert>-->
 
     <update id="updateByPrimaryKeySelective" parameterType="com.peng.desertcamel.user.entity.User">
         update t_user

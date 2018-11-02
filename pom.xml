@@ -28,7 +28,7 @@
         <jquery>3.3.1</jquery>
         <protostuff>1.0.8</protostuff>
         <lombok>1.16.16</lombok>
-
+        <shiro-redis>2.4.2.1-RELEASE</shiro-redis>
     </properties>
 
     <dependencies>
@@ -71,7 +71,12 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.3.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -82,6 +87,13 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-starter</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
         <!-- pagehelper分页 start -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -99,7 +111,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
        <!-- <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>

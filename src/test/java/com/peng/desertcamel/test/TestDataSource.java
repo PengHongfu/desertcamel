@@ -1,8 +1,9 @@
-package com.peng.desertcamel;
+package com.peng.desertcamel.test;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.peng.desertcamel.DesertcamelApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;

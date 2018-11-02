@@ -1,4 +1,4 @@
-package com.peng.desertcamel;
+package com.peng.desertcamel.test;
 
 import com.peng.desertcamel.user.entity.User;
 import org.junit.Test;
